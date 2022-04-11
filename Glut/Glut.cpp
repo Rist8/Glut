@@ -58,7 +58,7 @@ int frame;
 long time1, time2, timebase, timebase1;
 char s[50], g[50];
 // переменные для хранения идентификаторв окна
-int mainWindow, subWindow1, subWindow2, subWindow3;
+int mainWindow, subWindow1;
 //Граница между подокнами
 int border = 6;
 
@@ -93,20 +93,6 @@ void changeSize(int w1, int h1) {
 	glutPositionWindow(border, border);
 	glutReshapeWindow(w, h);
 	setProjection(w, h);
-
-	// установить активным подокно 2
-//	glutSetWindow(subWindow2);
-	// изменить размеры и позиция подокна
-//	glutPositionWindow(border, (h + border) / 2);
-//	glutReshapeWindow(w / 2 - border * 3 / 2, h / 2 - border * 3 / 2);
-//	setProjection(w / 2 - border * 3 / 2, h / 2 - border * 3 / 2);
-
-	// установить активным подокно 3
-//	glutSetWindow(subWindow3);
-	// изменить размеры и позиция подокна
-//	glutPositionWindow((w + border) / 2, (h + border) / 2);
-//	glutReshapeWindow(w / 2 - border * 3 / 2, h / 2 - border * 3 / 2);
-//	setProjection(w / 2 - border * 3 / 2, h / 2 - border * 3 / 2);
 }
 
 void drawMan()
@@ -135,26 +121,6 @@ void drawMan()
 		glutSolidCone(model[number].cone_p[14 * i + 10], model[number].cone_p[14 * i + 11], model[number].cone_p[14 * i + 12], model[number].cone_p[14 * i + 13]);
 	}
 	glPopMatrix();
-
-	// 2nd version
-	//glColor3f(1.0f, 1.0f, 1.0f);
-	//glTranslatef(0.0f, 0.75f, 0.0f);
-	//glutSolidSphere(0.75f, 20, 20);
-	// голова снеговика
-	//glTranslatef(0.0f, 1.0f, 0.0f);
-	//glutSolidSphere(0.25f, 20, 20);
-	// глаза снеговика
-	//glPushMatrix();
-	//glColor3f(0.0f, 0.0f, 0.0f);
-	//glTranslatef(0.05f, 0.10f, 0.18f);
-	//glutSolidSphere(0.05f, 10, 10);
-	//glTranslatef(-0.1f, 0.0f, 0.0f);
-	//glutSolidSphere(0.05f, 10, 10);
-	//glPopMatrix();
-	// нос снеговика
-	//glColor3f(1.0f, 0.5f, 0.5f);
-	//glRotatef(0.0f, 1.0f, 0.0f, 0.0f);
-	//glutSolidCone(0.08f, 0.5f, 10, 2);
 	glColor3f(1.0f, 1.0f, 1.0f);
 }
 
@@ -353,108 +319,14 @@ void renderScenesw1() {
 		0.0f, 1.0f, 0.0f);
 
 	renderScene2();
-
-	// счётчик кадров в секунду
-	/*frame++;
-
-	time1 = glutGet(GLUT_ELAPSED_TIME);
-	if (time1 - timebase > 1000) {
-		sprintf_s(s, "Informatika.TNU - FPS:%4.2f",
-			frame * 1000.0 / (time1 - timebase));
-		timebase = time1;
-		frame = 0;
-	}
-
-	setOrthographicProjection();
-
-	glPushMatrix();
-	glLoadIdentity();
-	renderBitmapString(5, 30, 0, GLUT_BITMAP_HELVETICA_12, s);
-	glPopMatrix();
-
-	restorePerspectiveProjection();
-	*/
 	glutSwapBuffers();
 }
-
-// функция рендеринга для подокна 2
-/*
-void renderScenesw2() {
-
-	glutSetWindow(subWindow2);
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glLoadIdentity();
-	gluLookAt(x, y + 15, z,
-		x, y - 1, z,
-		lx, 0, lz);
-
-	// нарисовать красный конус в области основной камеры
-	glPushMatrix();
-	glColor3f(1.0, 0.0, 0.0);
-	glTranslatef(x, y, z);
-	glRotatef(180 - (angle + deltaAngle) * 180.0 / 3.14, 0.0, 1.0, 0.0);
-	glutSolidCone(0.2, 0.8f, 4, 4);
-	glPopMatrix();
-
-	renderScene2();
-
-	glutSwapBuffers();
-}
-*/
 void timer(int)
 {
 	glutSetWindow(mainWindow);
 	glutPostRedisplay();
 	glutTimerFunc(1000 / 60, timer, 0);
 }
-// функция рендеринга для подокна 3
-
-//void renderScenesw3() {
-
-	//glutSetWindow(subWindow3);
-
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	//glLoadIdentity();
-	/*
-	gluLookAt(x - lz * 10, y, z + lx * 10,
-		x, y, z,
-		0.0f, 1.0f, 0.0f);
-
-	// нарисовать красный конус в области основной камеры
-	glPushMatrix();
-	glColor3f(1.0, 0.0, 0.0);
-	glTranslatef(x, y, z);
-	glRotatef(180 - (angle + deltaAngle) * 180.0 / 3.14, 0.0, 1.0, 0.0);
-	glutSolidCone(0.2, 0.8f, 4, 4);
-	glPopMatrix();
-
-	renderScene2();
-	*/
-	/*frame++;
-	time1 = glutGet(GLUT_ELAPSED_TIME);
-	if (time1 - timebase > 1000) {
-		sprintf_s(s, "\t FPS:%4.2f\n",
-			frame * 1000.0 / (time1 - timebase));
-		timebase = time1;
-		frame = 0;
-	}
-	if (fig % 2 == 1)
-	{
-		sprintf_s(s, 50, "\t\nMob has %d", currentHP);
-	}
-
-	setOrthographicProjection();
-
-	glPushMatrix();
-	glLoadIdentity();
-	renderBitmapString(5, 30, 0, GLUT_BITMAP_HELVETICA_12, s);
-	glPopMatrix();
-	restorePerspectiveProjection();
-	glutSwapBuffers();
-}*/
 
 // Глобальная функция рендеринга
 void renderSceneAll() {
@@ -468,8 +340,6 @@ void renderSceneAll() {
 
 	renderScene();
 	renderScenesw1();
-	//renderScenesw2();
-	//renderScenesw3();
 }
 
 // -----------------------------------	//
@@ -576,24 +446,6 @@ void attack()
 }
 void mouseButton(int button, int state, int x, int y) {
 
-	// только начало движение, если левая кнопка мыши нажата
-	/*if (button == GLUT_LEFT_BUTTON) {
-
-		//когда кнопка отпущена
-		if (state == GLUT_UP) {
-			angle += deltaAngle;
-			deltaAngle = 0.0f;
-			angley += deltaAngley;
-			deltaAngley = 0.0f;
-			xOrigin = -1;
-			yOrigin = -1;
-		}
-		else {// state = GLUT_DOWN
-			xOrigin = x;
-			yOrigin = y;
-		}
-	}
-	*/
 	if (button == GLUT_LEFT_BUTTON)
 	{
 		if (state == GLUT_DOWN)
@@ -684,8 +536,6 @@ int main(int argc, char** argv) {
 
 	glutReshapeFunc(changeSize);
 
-	// Удаление пустой функции для сохранения ресурсов CPU и GPU
-	//glutIdleFunc(renderSceneAll);
 	init();
 
 	// подокна
@@ -695,13 +545,6 @@ int main(int argc, char** argv) {
 	SetCursorPos(h / 2, w / 2);
 	ShowCursor(FALSE);
 
-	//subWindow2 = glutCreateSubWindow(mainWindow, border, (h + border) / 2, w / 2 - border * 3 / 2, h / 2 - border * 3 / 2);
-	//glutDisplayFunc(renderScenesw2);
-	//init();
-
-	//subWindow3 = glutCreateSubWindow(mainWindow, (w + border) / 2, (h + border) / 2, w / 2 - border * 3 / 2, h / 2 - border * 3 / 2);
-	//glutDisplayFunc(renderScenesw3);
-	//init();
 
 	// главный цикл
 	glutMainLoop();
