@@ -1,4 +1,0 @@
-﻿  Glut.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(127,1): warning C4005: CALLBACK: изменение макроопределения
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\glut.h(33): message : см. предыдущее определение "CALLBACK"
-LINK : fatal error LNK1104: не удается открыть файл "glut32.lib"
